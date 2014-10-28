@@ -1,3 +1,5 @@
+echo 'deprecated?'
+exit
 cd bin
 cmake ../
 make
