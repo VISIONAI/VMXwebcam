@@ -1,20 +1,26 @@
 echo 'Welcome to Mac Builder of VMX Webcam'
 
+mkdir -p ./Contents/MacOS/
+mkdir -p ./Contents/Frameworks/
+
+rm ./Contents/MacOS/*
+rm ./Contents/Frameworks/*
 #D=~/projects/VMXserver/build/VMXserver.app/
-D=~/projects/vmxmiddle/dist/VMX.app/
-F=$D/Contents/MacOS/VMXwebcam2
-G=$D/Contents/MacOS/VMXwebcam
-F=VMXwebcam2
+#D=~/projects/vmxmiddle/dist/VMX.app/
+D=.
+#F=$D/Contents/MacOS/VMXwebcam2
+#G=$D/Contents/MacOS/VMXwebcam
+F=.VMXwebcam
 G=VMXwebcam
 #D=.
 #F=.
 
-g++ -v -std=c++11 -I /opt/local/include -L/opt/local/lib -lopencv_core -lopencv_highgui -O3 -o ${F} VMXwebcam2.cpp
+g++ -v -std=c++11 -I /opt/local/include -L/opt/local/lib -lopencv_core -lopencv_highgui -O3 -o ${F} VMXwebcam.cpp
 
 #g++-mp-4.7 -v -std=c++11 -I /opt/local/include -L/opt/local/lib -lopencv_core -lopencv_highgui -o VMXvideo VMXvideo.cpp
 #g++ -std=c++11 `pkg-config opencv --cflags --libs` VMXwebcam.cpp -o VMXwebcam
 go build -o ${G} VMXwebcam.go
-exit
+#exit
 #clean up libs
 LIBS=`otool -L ${F} | grep "\t" | grep "/opt/local/lib" | awk '{print($1)}'`
 
@@ -71,3 +77,7 @@ for i in $LIBS; do
     install_name_tool -id $i $i
 done
 cd -
+
+#copy over
+mv $F ./Contents/MacOS
+mv $G ./Contents/MacOS
