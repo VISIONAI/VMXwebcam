@@ -67,10 +67,10 @@ func main() {
 		_,_ = stdout_pipe.Read(b1)
 		dat, _ := ioutil.ReadFile(result_file)
 
-		//w.Header().Set("Access-Control-Allow-Origin", "*")
-		//w.Header().Set("Allow","GET")
-		//w.Header().Set("Access-Control-Allow-Headers","Authorization,Content-Type")
-		//w.Header().Set("Access-Control-Allow-Methods","GET")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Allow","GET")
+		w.Header().Set("Access-Control-Allow-Headers","Authorization,Content-Type")
+		w.Header().Set("Access-Control-Allow-Methods","GET")
 
 		fmt.Fprintf(w, "%s", dat)
 		counter = counter + 1
